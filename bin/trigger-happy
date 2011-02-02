@@ -3,12 +3,44 @@
 require 'rubygems'
 require 'em-websocket'
 require 'directory_watcher'
+require 'optparse'
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+  opts.banner = %{Usage: trigger-happy [options] [dir1 dir2 ...]
+  
+  Examples:
+      trigger-happy                         #=> watches all files
+      trigger-happy lib public              #=> watches all files in lib and public
+      trigger-happy --glob="**/*.rb" lib    #=> watches all ruby files in lib
+      
+  }
+  
+  options[:glob] = '**/*'
+  opts.on( '-g', '--glob PATTERN', 'Glob pattern to define which files to watch' ) do |pattern|
+    options[:glob] = pattern
+  end
+  
+  opts.on( '-h', '--help', 'Display this screen' ) do
+    puts opts
+    exit
+  end
+end
+optparse.parse!
+
+directories = []
+directories.push('.') if ARGV.empty?
+ARGV.each do |dir|
+  directories.push(dir)
+end
+
 
 EventMachine.kqueue = true if EventMachine.kqueue?
 EventMachine::run do
   @sockets = []
   
-  dw = DirectoryWatcher.new '.', :glob => '**/*', :pre_load => true, :scanner => :em
+  dw = DirectoryWatcher.new '.', :glob => directories.collect {|d| File.join(d, options[:glob])}, :pre_load => true, :scanner => :em
   dw.add_observer do |*events|
     events.each do |e|
       @sockets.each {|s| s.send e.path if e.type == :modified}

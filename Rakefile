@@ -16,35 +16,9 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/alexgb/trigger-happy"
   gem.license = "MIT"
   gem.summary = %Q{Browser page refreshing for your web projects}
-  gem.description = %Q{TriggerHappy watches a directory of files and tells pages activated with a bookmarklet to refresh when changes are detected}
-  gem.email = "alex.gibbons@gmail.com"
+  gem.description = %Q{TriggerHappy watches a directory of files and tells browser pages, activated with a bookmarklet, to refresh when changes are detected}
+  gem.email = "alex.gibbons [a] gmail [dot] com"
   gem.authors = ["Alex Gibbons"]
   gem.bindir = "bin"
 end
 Jeweler::RubygemsDotOrgTasks.new
-
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "trigger-happy #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end

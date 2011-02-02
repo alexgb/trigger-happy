@@ -1,7 +1,23 @@
-= trigger-happy
+= TriggerHappy
 
-Description goes here.
+TriggerHappy watches a directory of files and tells browser pages, activated with a bookmarklet, to refresh when changes are detected
 
+== Installation
+
+Install the library.
+
+    gem install trigger-happy
+    
+Install the bookmarklet in your browser.
+
+    trigger-happy-setup
+    
+
+== Usage
+
+    cd /me/my/project
+    trigger-happy
+    
 == Contributing to trigger-happy
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet

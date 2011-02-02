@@ -2,6 +2,8 @@
 
 require 'webrick'
 require 'uri'
+require 'trigger-happy/install_page_server'
+
 
 PORT = 10100
 PATH = "http://localhost:#{PORT}"
@@ -17,7 +19,7 @@ module OnStart
 end
 
 server = WEBrick::HTTPServer.new(:Port => PORT, :StartCallback => OnStart)
-server.mount("/", WEBrick::HTTPServlet::ERBHandler, File.join(File.dirname(__FILE__), '..', 'public', 'install_bookmarklet.rhtml'))
+server.mount("/", TriggerHappy::InstallPageServer)
 
 
 ['INT', 'TERM'].each {|signal| 
