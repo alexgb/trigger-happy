@@ -17,7 +17,7 @@ Jeweler::Tasks.new do |gem|
   gem.license = "MIT"
   gem.summary = %Q{Browser page refreshing for your web projects}
   gem.description = %Q{TriggerHappy watches a directory of files and tells browser pages, activated with a bookmarklet, to refresh when changes are detected}
-  gem.email = "alex.gibbons@gmail.com"
+  gem.email = "alex.gibbons [a] gmail [dot] com"
   gem.authors = ["Alex Gibbons"]
   gem.bindir = "bin"
   gem.add_dependency 'em-websocket'
