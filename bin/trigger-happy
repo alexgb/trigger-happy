@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'em-websocket'
+require 'directory_watcher'
+
+EventMachine.kqueue = true if EventMachine.kqueue?
+EventMachine::run do
+  @sockets = []
+  
+  dw = DirectoryWatcher.new '.', :glob => '**/*', :pre_load => true, :scanner => :em
+  dw.add_observer do |*events|
+    events.each do |e|
+      @sockets.each {|s| s.send e.path if e.type == :modified}
+    end
+  end
+  dw.start
+  
+  EventMachine::WebSocket.start(:host => "0.0.0.0", :port => 10101) do |socket|
+    socket.onopen do
+      @sockets.push(socket)
+    end
+    socket.onclose do
+      @sockets.delete(socket)
+    end
+  end
+  
+  puts "Server running use the included bookmarklet to enable page refreshing"
+end

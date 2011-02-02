@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'webrick'
+require 'uri'
+
+PORT = 10100
+PATH = "http://localhost:#{PORT}"
+
+puts "\nInstall the bookmarklet by going to #{PATH}\nThen quit WEBrick with ctrl-c"
+
+$stderr = File.new('/dev/null', 'w')
+
+module OnStart
+  def self.call
+    `open #{PATH}`
+  end
+end
+
+server = WEBrick::HTTPServer.new(:Port => PORT, :StartCallback => OnStart)
+server.mount("/", WEBrick::HTTPServlet::ERBHandler, File.join(File.dirname(__FILE__), '..', 'public', 'install_bookmarklet.rhtml'))
+
+
+['INT', 'TERM'].each {|signal| 
+  trap(signal) {server.shutdown}
+}
+
+server.start
