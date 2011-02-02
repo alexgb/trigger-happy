@@ -1,6 +1,6 @@
 = TriggerHappy
 
-TriggerHappy watches a directory of files and tells browser pages, activated with a bookmarklet, to refresh when changes are detected
+TriggerHappy watches a directory of files and tells browser pages, activated with a bookmarklet, to refresh when changes are detected.
 
 == Installation
 
@@ -17,6 +17,8 @@ Install the bookmarklet in your browser.
 
     cd /me/my/project
     trigger-happy
+    
+Now use your browser bookmarklet to activate page refreshing when watched files change.
     
 == Contributing to trigger-happy
  
