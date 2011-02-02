@@ -30,7 +30,8 @@ Gem::Specification.new do |s|
     "lib/trigger-happy.rb",
     "lib/trigger-happy/install_page_server.rb",
     "test/helper.rb",
-    "test/test_trigger-happy.rb"
+    "test/test_trigger-happy.rb",
+    "trigger-happy.gemspec"
   ]
   s.homepage = %q{http://github.com/alexgb/trigger-happy}
   s.licenses = ["MIT"]
