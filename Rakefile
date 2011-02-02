@@ -20,7 +20,5 @@ Jeweler::Tasks.new do |gem|
   gem.email = "alex.gibbons [a] gmail [dot] com"
   gem.authors = ["Alex Gibbons"]
   gem.bindir = "bin"
-  gem.add_dependency 'em-websocket'
-  gem.add_dependency 'directory_watcher'
 end
 Jeweler::RubygemsDotOrgTasks.new
